@@ -1,0 +1,8 @@
+#global tags
+GPATH
+GRTAGS
+GSYMS
+GTAGS
+
+
+build/
