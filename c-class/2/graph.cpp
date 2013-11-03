@@ -5,7 +5,7 @@ class Graph {
 public:
 	Graph(int vertices, double density, double distance_min, double distance_max)
 		: vertices_(vertices),
-		  density_(density_),
+		  density_(density),
 		  distance_min_(distance_min),
 		  distance_max_(distance_max)
 	{
