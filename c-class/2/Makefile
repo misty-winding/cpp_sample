@@ -2,6 +2,7 @@ PROGNAME := test
 
 SRCS := main.cpp  \
         graph.cpp \
+        priority_queue.cpp \
         shortest_path.cpp
 
 CXX := g++
