@@ -1,14 +1,15 @@
 PROGNAME := test
 
-SRCS := main.cpp \
-        graph.cpp
+SRCS := main.cpp  \
+        graph.cpp \
+        shortest_path.cpp
 
 CXX := g++
 CPPFLAGS := -I./
 DEFS :=
 LDFLAGS :=
 LIBS :=
-CXXFLAGS := -Wall -O0 -g
+CXXFLAGS := -W -Wall -O0 -g
 
 OUTDIR := build
 
