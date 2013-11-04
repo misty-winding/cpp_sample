@@ -131,6 +131,8 @@ int Graph::Neighbors(int vertex_index, int* p_neighbor_list)
             p_neighbor_list++;
             node_num++;
         }
+
+        ++p_edge;
     }
 
     return node_num;
