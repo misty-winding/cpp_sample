@@ -4,96 +4,12 @@
 #include <iomanip>
 #include <cstdlib>
 #include <ctime>
+#include "graph.h"
 
 
-using std::vector;
 using std::cout;
 using std::endl;
-using std::ostream;
 
-
-typedef struct {
-    bool   b_connect;
-    double distance;
-} ST_EDGE;
-
-
-typedef struct {
-    int row;
-    int col;
-} ST_POINT;
-
-
-class Graph {
-public:
-    Graph(int vertices, double density, double distance_min, double distance_max);
-    ~Graph() { delete p_matrix_; }
-
-    int GetNumberOfVertices(void) { return vertices_; }
-    int GetNumberOfEdges(void) { return edges_; }
-    bool Adjance(int row, int col);
-    int Neighbors(int vertex_index, int* p_neighbor_list);
-    void Add(int vertex_index_x, int vertex_index_y, double distance);
-
-    friend ostream& operator<< (ostream& out, Graph& graph);
-
-
-private:
-    int vertices_;
-    int edges_;
-    double density_;
-    double distance_min_;
-    double distance_max_;
-
-    vector<ST_EDGE>* p_matrix_;
-
-    inline int get_index_in_matrix(const ST_POINT &point)
-    {
-        assert(point.row < vertices_);
-        assert(point.col < vertices_);
-
-        return point.row * vertices_ + point.col;
-    }
-
-    inline int get_index_in_matrix(int vertex_index)
-    {
-        assert(vertex_index < vertices_);
-
-        return vertex_index * vertices_;
-    }
-
-    inline void get_point_in_matrix(int index, ST_POINT &point)
-    {
-        assert(index < vertices_ * vertices_);
-
-        point.row = index / vertices_;
-        point.col = index % vertices_;
-    }
-
-    inline ST_EDGE* get_edge_info(int index)
-    {
-        assert(index < vertices_ * vertices_);
-
-        return &(*p_matrix_)[index];
-    }
-
-    inline ST_EDGE* get_edge_info(const ST_POINT &point)
-    {
-        int index = get_index_in_matrix(point);
-        return &(*p_matrix_)[index];
-    }
-
-    inline ST_EDGE* get_row_first_edge_info(int vertex_index)
-    {
-        int index = get_index_in_matrix(vertex_index);
-        ST_EDGE* p_edge = get_edge_info(index);
-
-        return p_edge;
-    }
-
-    void set_edge_info(const ST_POINT &point, const ST_EDGE edge);
-    void create_edge(void);
-};
 
 /*
  ***************************************************************************************************
@@ -130,7 +46,6 @@ double get_random_val(double max, double min)
  ***************************************************************************************************
  *   @brief
  **************************************************************************************************/
-#if 1
 void Graph::create_edge(void)
 {
     double  random_val;
@@ -150,35 +65,6 @@ void Graph::create_edge(void)
         }
     }
 }
-
-#else
-
-/*
- ***************************************************************************************************
- *   @brief
- **************************************************************************************************/
-void Graph::create_edge(void)
-{
-    ST_POINT point;
-    double  distance;
-    bool b_connect;
-    int edge_num = (vertices_ * (vertices_ - 1) / 2) * density_;
-    int random_value;
-    int index_max_in_matrix = vertices_ * vertices_ - 1;
-
-    do {
-        random_value = get_random_val(index_max_in_matrix, 0);
-        get_point_in_matrix(random_value, point);
-        b_connect = Adjance(point.row, point.col);
-        if (!b_connect) {
-            distance = get_random_val(distance_max_, distance_min_);
-            Add(point.col, point.row, distance);
-            edge_num--;
-        }
-    } while (0 < edge_num);
-}
-
-#endif
 
 
 
@@ -218,13 +104,13 @@ Graph::Graph(int vertices, double density, double distance_min, double distance_
  ***************************************************************************************************
  *   @brief
  **************************************************************************************************/
-bool Graph::Adjance(int row, int col)
+bool Graph::Adjance(int vertex_index_x, int vertex_index_y)
 {
     ST_EDGE* p_edge;
     ST_POINT point;
 
-    point.row = row;
-    point.col = col;
+    point.row = vertex_index_x;
+    point.col = vertex_index_y;
     p_edge = get_edge_info(point);
 
     return p_edge->b_connect;
@@ -271,6 +157,16 @@ void Graph::Add(int vertex_index_x, int vertex_index_y, double distance)
     set_edge_info(point, new_edge);
 
     edges_++;
+}
+
+/*
+ ***************************************************************************************************
+ *   @brief
+ **************************************************************************************************/
+ST_EDGE* Graph::GetEdgeValue(int vertex_index_x, int vertex_index_y)
+{
+
+	return NULL;
 }
 
 /*

@@ -1,7 +1,8 @@
 PROGNAME := test
 
-SRCS := main.cpp \
-        graph.cpp
+SRCS := main.cpp  \
+        graph.cpp \
+        shortest_path.cpp
 
 CXX := g++
 CPPFLAGS := -I./
