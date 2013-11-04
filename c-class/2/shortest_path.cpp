@@ -27,7 +27,7 @@ public:
 		}
 	}
 
-	typedef typename CLOSE_LIST::iterator iterator;
+	typedef CLOSE_LIST::iterator iterator;
 
 	int index_of_vertics;
 	int vertex_from;
@@ -60,9 +60,11 @@ int ShortestPath::update_openset(CLOSE_LIST* p_closeset, OPEN_LIST* p_openset)
 	int neighbor_num;
 	int vertex_index;
 	NODE node;
-	
+
 	NODE::iterator iter = (*p_closeset).begin();
 
+	// for all closeset
+	//
 	while (iter != (*p_closeset).end()) {
 		node = *iter;
 
@@ -75,6 +77,7 @@ int ShortestPath::update_openset(CLOSE_LIST* p_closeset, OPEN_LIST* p_openset)
 		//
 		for (int i = 0; i < neighbor_num; i++) {
 			int index_of_neighbor = *p_neighbor_list;
+			ST_EDGE* p_edge = p_graph_->GetEdgeValue(vertex_index, index_of_neighbor);
 
 			p_neighbor_list++;
 		}
@@ -83,7 +86,7 @@ int ShortestPath::update_openset(CLOSE_LIST* p_closeset, OPEN_LIST* p_openset)
 	}
 
 	delete [] p_neighbor_list;
-	
+
 	return 0;
 }
 
@@ -102,7 +105,7 @@ void ShortestPath::Path(int start, int end, CLOSE_LIST* p_result_list)
 	CLOSE_LIST* p_closeset;
 	OPEN_LIST*  p_openset;
 	NODE        node;
-	
+
 	p_closeset = new CLOSE_LIST;
     p_openset = new OPEN_LIST;
 
@@ -121,4 +124,5 @@ void ShortestPath::Path(int start, int end, CLOSE_LIST* p_result_list)
 	delete p_closeset;
 	delete p_openset;
 }
+
 // EOF
