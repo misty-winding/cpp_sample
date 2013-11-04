@@ -165,8 +165,15 @@ void Graph::Add(int vertex_index_x, int vertex_index_y, double distance)
  **************************************************************************************************/
 ST_EDGE* Graph::GetEdgeValue(int vertex_index_x, int vertex_index_y)
 {
+    ST_POINT point;
+    ST_EDGE* p_edge;
 
-	return NULL;
+    point.row = vertex_index_x;
+    point.col = vertex_index_y;
+
+    p_edge = get_edge_info(point);
+
+    return p_edge;
 }
 
 /*
