@@ -31,6 +31,7 @@ set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 set(sources
    main.cpp
    collection_data_test.cpp
+   lib/mutex_posix.cpp
 )
 add_executable(test ${sources})
 target_link_libraries(test pthread)
