@@ -43,6 +43,7 @@
 #include "graph.h"
 #include "priority_queue.h"
 #include "shortest_path.h"
+#include "report.h"
 
 
 using std::cout;
@@ -87,9 +88,12 @@ void algo_test(void)
     int start = 0;
     int end = 5;
     NodeList* p_node_list = new NodeList;
-
-    p_short_path->Path(start, end, p_node_list);
-
+    bool b_found;
+	double distance;
+	
+    b_found = p_short_path->Path(start, end, p_node_list, distance);
+	p_short_path->DumpPath(b_found, p_node_list, distance);
+	
     delete p_short_path;
     delete p_graph;
 }
@@ -100,16 +104,22 @@ void algo_test(void)
  **************************************************************************************************/
 int main(int argc, char** argv)
 {
-    if (0 == argc) {
-
-    }
-    if (NULL == argv) {
-
-    }
-
     // TestGraph();
     // PriorityQueueTest();
-    algo_test();
+    // algo_test();
+
+	{
+		Report report;
+		double density;
+
+		density = 0.2;
+		cout << "density = " << density << endl;
+		report.exec(density);
+
+		density = 0.4;
+		cout << "density = " << density << endl;
+		report.exec(density);
+	}
 
     return 0;
 }

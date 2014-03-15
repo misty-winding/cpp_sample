@@ -1,3 +1,7 @@
+#ifndef PRIORITY_QUEUE_H
+#define PRIORITY_QUEUE_H
+
+
 using std::vector;
 using std::priority_queue;
 using std::ostream;
@@ -74,3 +78,5 @@ private:
     NodeQueue* p_queue_;
 
 };
+
+#endif // #ifndef PRIORITY_QUEUE_H

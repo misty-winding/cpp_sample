@@ -84,6 +84,8 @@ Graph::Graph(int vertices, double density, double distance_min, double distance_
 {
     assert(0 != vertices_);
 
+	srandom((unsigned)time(NULL));
+	
     ST_EDGE edge;
 
     int element_num = vertices_ * vertices_;
@@ -240,7 +242,7 @@ ostream& operator<< (ostream& out, Graph& graph)
  **************************************************************************************************/
 void TestGraph(void)
 {
-    srandom((unsigned)time(NULL));
+    // srandom((unsigned)time(NULL));
 
     int vertices = 10;
     double density = 0.1;

@@ -1,3 +1,6 @@
+#ifndef GRAPH_H
+#define GRAPH_H
+
 
 using std::ostream;
 using std::vector;
@@ -86,3 +89,7 @@ private:
     void set_edge_info(const ST_POINT &point, const ST_EDGE edge);
     void create_edge(void);
 };
+
+#endif // #ifndef GRAPH_H
+
+// EOF
